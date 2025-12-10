@@ -20,6 +20,7 @@
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "i18next": "^25.7.2",
+    "node": "^20.19.6",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -27,7 +28,8 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.1.0",
-    "@docusaurus/types": "^3.1.0"
+    "@docusaurus/types": "^3.1.0",
+    "@types/node": "^24.10.2"
   },
   "browserslist": {
     "production": [
@@ -42,7 +44,6 @@
     ]
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=25.2.1"
   }
 }
-
