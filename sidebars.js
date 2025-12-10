@@ -4,6 +4,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Chapter 1: Introduction to Physical AI',
+      collapsed: false,
       items: [
         'chapter-1/index',
         'chapter-1/key-concepts',

@@ -6,8 +6,8 @@ const config = {
   tagline: 'Comprehensive textbook on Physical AI and Humanoid Robotics',
   favicon: 'img/favicon.ico',
 
-  url: 'https://Ha70270217.github.io',
-  baseUrl: '/',
+  url: 'https://ha70270217.github.io',
+  baseUrl: '/textbook-website/',
   organizationName: 'Ha70270217',
   projectName: 'textbook-website',
 
@@ -33,7 +33,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',         // homepage = docs
           editLocalizedFiles: true,
-          editUrl: 'https://github.com/Ha70270217/textbook-website/edit/main/',
+          editUrl: 'https://github.com/ha70270217/textbook-website/edit/main/',
           sidebarCollapsible: true,
         },
         blog: false,
@@ -70,7 +70,7 @@ const config = {
           position: 'left',
           label: 'Chapters',
         },
-        { href: 'https://github.com/Ha70270217/textbook-website', label: 'GitHub', position: 'right' },
+        { href: 'https://github.com/ha70270217/textbook-website', label: 'GitHub', position: 'right' },
       ],
     },
 
