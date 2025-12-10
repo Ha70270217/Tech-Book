@@ -6,7 +6,7 @@ const config = {
   tagline: 'Comprehensive textbook on Physical AI and Humanoid Robotics',
   favicon: 'img/favicon.ico',
 
-  url: 'https://ha70270217.github.io',
+ url: 'https://your-vercel-app.vercel.app', 
   baseUrl: '/textbook-website/',
   organizationName: 'Ha70270217',
   projectName: 'textbook-website',
