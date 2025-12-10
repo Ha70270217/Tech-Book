@@ -7,7 +7,7 @@ const config = {
   favicon: 'img/favicon.ico',
 
  url: 'https://your-vercel-app.vercel.app', 
-  baseUrl: '/textbook-website/',
+  baseUrl: '/',
   organizationName: 'Ha70270217',
   projectName: 'textbook-website',
 
