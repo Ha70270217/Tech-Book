@@ -33,7 +33,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',         // homepage = docs
           editLocalizedFiles: true,
-          editUrl: 'https://github.com/ha70270217/textbook-website/edit/main/',
+          editUrl: 'https://github.com/Ha70270217/textbook-website/edit/main/',
           sidebarCollapsible: true,
         },
         blog: false,
@@ -43,20 +43,8 @@ const config = {
   ],
 
 
-  plugins: [
-    [
-      '@docusaurus/plugin-pwa',
-      {
-        debug: true,
-        offlineModeActivationStrategies: ['appInstalled', 'standalone', 'queryString'],
-        pwaHead: [
-          { tagName: 'link', rel: 'icon', href: '/img/icon-192x192.png' },
-          { tagName: 'link', rel: 'manifest', href: '/manifest.json' },
-          { tagName: 'meta', name: 'theme-color', content: '#2e8555' },
-        ],
-      },
-    ],
-  ],
+ plugins: [],
+
 
 
   themeConfig: ({
@@ -70,7 +58,7 @@ const config = {
           position: 'left',
           label: 'Chapters',
         },
-        { href: 'https://github.com/ha70270217/textbook-website', label: 'GitHub', position: 'right' },
+        { href: 'https://github.com/Ha70270217/textbook-website', label: 'GitHub', position: 'right' },
       ],
     },
 

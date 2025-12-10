@@ -5,6 +5,7 @@
   "homepage": "https://ha70270217.github.io/textbook-website/",
 
   "scripts": {
+    "export": "docusaurus export",
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
