@@ -1,0 +1,192 @@
+/**
+ * Copyright (c) 2017-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/* You can override the default Docusaurus variables here. */
+:root {
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Custom styles for textbook */
+.textbook-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.chapter-intro {
+  background-color: var(--ifm-color-emphasis-100);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.section-content {
+  margin-top: 2rem;
+}
+
+.exercise-container {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  background-color: var(--ifm-color-emphasis-0);
+}
+
+.exercise-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.exercise-type {
+  font-weight: bold;
+  color: var(--ifm-color-primary);
+}
+
+.difficulty {
+  font-size: 0.85rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.difficulty-beginner {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.difficulty-intermediate {
+  background-color: #fff8e1;
+  color: #f57f17;
+}
+
+.difficulty-advanced {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.solution-content {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--ifm-color-emphasis-100);
+  border-radius: 4px;
+}
+
+.learning-objective {
+  border-left: 4px solid var(--ifm-color-info);
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  background-color: var(--ifm-color-info-background);
+}
+
+.prerequisite {
+  border-left: 4px solid var(--ifm-color-warning);
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  background-color: var(--ifm-color-warning-background);
+}
+
+.key-term {
+  border-bottom: 1px dotted var(--ifm-color-primary);
+  cursor: help;
+}
+
+.reference-list {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .difficulty-beginner {
+  background-color: #1b5e2020;
+  color: #a5d6a7;
+}
+
+[data-theme='dark'] .difficulty-intermediate {
+  background-color: #ff8f0020;
+  color: #ffe082;
+}
+
+[data-theme='dark'] .difficulty-advanced {
+  background-color: #b71c1c20;
+  color: #ffcdd2;
+}
+
+[data-theme='dark'] .learning-objective {
+  background-color: #0277bd20;
+}
+
+[data-theme='dark'] .prerequisite {
+  background-color: #f57f1720;
+}
+
+/* RTL support for Urdu and other RTL languages */
+html[dir="rtl"] body {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] .textbook-content {
+  text-align: right;
+}
+
+html[dir="rtl"] .exercise-header {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .exercise-type {
+  margin-right: auto;
+  margin-left: 1rem;
+}
+
+/* RTL adjustments for navigation */
+html[dir="rtl"] .navbar__items--right {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+html[dir="rtl"] .navbar__items--left {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+/* RTL for list items and content */
+html[dir="rtl"] ol,
+html[dir="rtl"] ul {
+  padding-right: 2rem;
+  padding-left: 0;
+}
+
+html[dir="rtl"] .menu__list-item-collapsible .menu__caret {
+  margin-left: 0;
+  margin-right: 0.5rem;
+  transform: rotate(180deg);
+}

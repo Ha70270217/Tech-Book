@@ -1,0 +1,37 @@
+.contentTemplate {
+  margin: 2rem 0;
+  padding: 0 1rem;
+}
+
+.conceptsSection {
+  margin: 2rem 0;
+}
+
+.conceptList {
+  margin-top: 1.5rem;
+}
+
+.examplesSection {
+  margin: 2rem 0;
+}
+
+.exampleList {
+  margin-top: 1.5rem;
+}
+
+.exercisesSection {
+  margin: 2rem 0;
+}
+
+.referencesSection {
+  margin: 2rem 0;
+}
+
+/* Responsive design */
+@media (min-width: 997px) {
+  .contentTemplate {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+  }
+}

@@ -1,55 +1,56 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+Version change: N/A (initial creation) → 1.0.0
+Added sections: All sections (initial constitution)
+Templates requiring updates: N/A (initial creation)
+Follow-up TODOs: None
+-->
+# Physical AI & Humanoid Robotics Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Clarity and Precision
+All content must be unambiguous, technically accurate, and free of fluff or filler text. No concept should be introduced without clear definition and purpose. Content must be implementable and understandable by learners without requiring external clarification.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Deterministic Structure
+All outputs must follow strict, repeatable structural patterns. Each chapter follows the template: Overview → Components → Flows → Requirements → Constraints → Examples → Summary. This ensures predictable formatting across all content.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Minimalist Technical Coverage
+Only information required for implementation and understanding shall be included. Content must focus on essential technical details without unnecessary elaboration. Each section must serve a clear, atomic purpose.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Technical Accuracy and Groundedness
+No hallucinations—content must remain logically, technically, and structurally sound. All concepts, APIs, and methods must be real and verifiable. Speculative content is forbidden unless explicitly requested and clearly labeled.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Modularity and Reusability
+Each chapter or section is broken into clearly defined parts that can be reused or extended. Content must be structured in atomic, self-contained modules that can function independently while contributing to the whole.
 
-### [PRINCIPLE_6_NAME]
+### VI. Engineering Discipline
+Content must read like professional textbook material, not essays or marketing material. Technical writing standards require precision, consistency, and professional tone throughout all deliverables.
 
+## Content Standards
 
-[PRINCIPLE__DESCRIPTION]
+### Template-Driven Generation
+All content must be generated using predefined templates to ensure consistency. The standard chapter template includes: Overview, Components, Flows, Requirements, Constraints, Examples, and Summary sections.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### Style Modes
+Content must be produced in one of three style modes: ultra-minimal (essential facts only), standard (balanced technical detail), or enterprise (comprehensive with additional context). The standard mode is the default unless specified otherwise.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### Formatting and Referencing
+All content must follow Markdown-first formatting standards with strict internal referencing. Concepts, modules, and APIs must be consistently referenced across all sections. Automatic glossary generation must be supported through consistent terminology.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### Section Templates
+Each section must follow the prescribed template structure. No deviation from set formatting rules is permitted. Content must be modular and version-friendly to support iterative improvements.
+
+### Quality Gates
+All content must pass technical accuracy verification. No undefined concepts or functions may be introduced. Content must render cleanly in Markdown with predictable headings and formatting.
+
+### Review Process
+Content must undergo technical review for accuracy and implementation feasibility. All examples must be verifiable and implementable. Cross-references must be validated for consistency.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution governs all content creation for the Physical AI & Humanoid Robotics book project. All contributors must adhere to these principles. Amendments to this constitution require explicit approval and must be documented with clear rationale. All content must be reviewed for compliance with these principles before acceptance.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-12-07 | **Last Amended**: 2025-12-07

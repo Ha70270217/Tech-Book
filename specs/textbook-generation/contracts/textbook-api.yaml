@@ -1,0 +1,600 @@
+openapi: 3.0.3
+info:
+  title: Textbook API
+  description: API for the AI-Native Textbook on Physical AI & Humanoid Robotics
+  version: 1.0.0
+  contact:
+    name: Textbook Development Team
+    email: support@textbook.example.com
+
+servers:
+  - url: https://api.textbook.example.com/v1
+    description: Production server
+  - url: https://staging-api.textbook.example.com/v1
+    description: Staging server
+  - url: http://localhost:3001/v1
+    description: Development server
+
+paths:
+  /auth/login:
+    post:
+      summary: User login
+      description: Authenticate user and return JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider:
+                  type: string
+                  enum: [google, github, email]
+                  description: Authentication provider
+                id_token:
+                  type: string
+                  description: ID token from the authentication provider
+                email:
+                  type: string
+                  format: email
+                  description: Email for email-based authentication
+                password:
+                  type: string
+                  format: password
+                  description: Password for email-based authentication
+              required:
+                - provider
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: JWT token for subsequent requests
+                  user:
+                    $ref: '#/components/schemas/User'
+        '401':
+          description: Invalid credentials
+        '400':
+          description: Invalid request parameters
+
+  /chapters:
+    get:
+      summary: List all chapters
+      description: Retrieve all available chapters in the textbook
+      parameters:
+        - name: language
+          in: query
+          required: false
+          schema:
+            type: string
+            default: 'en'
+            description: Language code for localization
+      responses:
+        '200':
+          description: List of chapters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chapter'
+        '401':
+          description: Unauthorized access
+
+  /chapters/{chapterId}:
+    get:
+      summary: Get chapter details
+      description: Retrieve detailed information about a specific chapter
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+            description: Chapter ID
+        - name: language
+          in: query
+          required: false
+          schema:
+            type: string
+            default: 'en'
+            description: Language code for localization
+      responses:
+        '200':
+          description: Chapter details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChapterWithContent'
+        '404':
+          description: Chapter not found
+
+  /sections/{sectionId}:
+    get:
+      summary: Get section details
+      description: Retrieve detailed information about a specific section
+      parameters:
+        - name: sectionId
+          in: path
+          required: true
+          schema:
+            type: string
+            description: Section ID
+        - name: language
+          in: query
+          required: false
+          schema:
+            type: string
+            default: 'en'
+            description: Language code for localization
+      responses:
+        '200':
+          description: Section details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+        '404':
+          description: Section not found
+
+  /users/{userId}/progress:
+    get:
+      summary: Get user progress
+      description: Retrieve the user's progress across all chapters and sections
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            description: User ID
+      responses:
+        '200':
+          description: User progress data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProgress'
+        '404':
+          description: User not found
+      security:
+        - bearerAuth: []
+
+  /users/{userId}/progress/{chapterId}:
+    put:
+      summary: Update chapter progress
+      description: Update the user's progress for a specific chapter
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            description: User ID
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+            description: Chapter ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                completion_percentage:
+                  type: integer
+                  minimum: 0
+                  maximum: 100
+                  description: Completion percentage for the chapter
+                section_id:
+                  type: string
+                  description: Current section ID the user is on
+                status:
+                  type: string
+                  enum: [not_started, in_progress, completed]
+                  description: Current status of the chapter
+              required:
+                - completion_percentage
+      responses:
+        '200':
+          description: Progress updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProgress'
+        '404':
+          description: User or chapter not found
+      security:
+        - bearerAuth: []
+
+  /users/{userId}/bookmarks:
+    get:
+      summary: Get user bookmarks
+      description: Retrieve all bookmarks for the user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            description: User ID
+      responses:
+        '200':
+          description: List of user bookmarks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bookmark'
+        '404':
+          description: User not found
+      security:
+        - bearerAuth: []
+
+    post:
+      summary: Create a bookmark
+      description: Create a new bookmark for the user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            description: User ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                section_id:
+                  type: string
+                  description: Section ID to bookmark
+                notes:
+                  type: string
+                  description: Optional notes for the bookmark
+              required:
+                - section_id
+      responses:
+        '201':
+          description: Bookmark created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bookmark'
+        '404':
+          description: User or section not found
+      security:
+        - bearerAuth: []
+
+  /users/{userId}/assessments:
+    post:
+      summary: Submit assessment response
+      description: Submit a response to an exercise or assessment
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            description: User ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                exercise_id:
+                  type: string
+                  description: Exercise ID
+                response:
+                  type: string
+                  description: User's response to the exercise
+              required:
+                - exercise_id
+                - response
+      responses:
+        '201':
+          description: Assessment response recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentResponse'
+        '404':
+          description: User or exercise not found
+      security:
+        - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique user identifier
+        email:
+          type: string
+          format: email
+          description: User's email address
+        username:
+          type: string
+          description: User's display name
+        auth_provider:
+          type: string
+          enum: [google, github, email]
+          description: Authentication provider used
+        language:
+          type: string
+          default: 'en'
+          description: Preferred language
+        created_at:
+          type: string
+          format: date-time
+          description: Account creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+
+    Chapter:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique chapter identifier
+        title:
+          type: string
+          description: Chapter title
+        slug:
+          type: string
+          description: URL-friendly identifier
+        learning_objectives:
+          type: array
+          items:
+            type: string
+          description: List of learning objectives
+        prerequisites:
+          type: array
+          items:
+            type: string
+          description: List of prerequisites
+        estimated_time_minutes:
+          type: integer
+          description: Estimated time to complete in minutes
+        order_index:
+          type: integer
+          description: Position in the textbook sequence
+        status:
+          type: string
+          enum: [draft, review, published]
+          description: Publication status
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+
+    ChapterWithContent:
+      allOf:
+        - $ref: '#/components/schemas/Chapter'
+        - type: object
+          properties:
+            content:
+              type: string
+              description: Chapter content in Markdown format
+            sections:
+              type: array
+              items:
+                $ref: '#/components/schemas/Section'
+
+    Section:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique section identifier
+        chapter_id:
+          type: string
+          description: Parent chapter ID
+        title:
+          type: string
+          description: Section title
+        slug:
+          type: string
+          description: URL-friendly identifier
+        content_type:
+          type: string
+          enum: [overview, concepts, examples, exercises, references]
+          description: Type of content in the section
+        content:
+          type: string
+          description: Section content in Markdown format
+        order_index:
+          type: integer
+          description: Position within the chapter
+        exercises:
+          type: array
+          items:
+            $ref: '#/components/schemas/Exercise'
+        references:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reference'
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+
+    Exercise:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique exercise identifier
+        section_id:
+          type: string
+          description: Parent section ID
+        type:
+          type: string
+          enum: [multiple_choice, short_answer, coding, essay]
+          description: Type of exercise
+        question:
+          type: string
+          description: Exercise question
+        options:
+          type: array
+          items:
+            type: string
+          description: Options for multiple choice questions
+        answer:
+          type: string
+          description: Correct answer
+        explanation:
+          type: string
+          description: Explanation for the answer
+        difficulty:
+          type: string
+          enum: [beginner, intermediate, advanced]
+          description: Difficulty level
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp
+
+    Reference:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique reference identifier
+        section_id:
+          type: string
+          description: Parent section ID
+        type:
+          type: string
+          enum: [academic, documentation, external, internal]
+          description: Type of reference
+        citation:
+          type: string
+          description: Properly formatted citation
+        url:
+          type: string
+          format: uri
+          description: Reference URL
+        description:
+          type: string
+          description: Brief description of the reference
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp
+
+    UserProgress:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique progress record identifier
+        user_id:
+          type: string
+          description: Associated user ID
+        chapter_id:
+          type: string
+          description: Associated chapter ID
+        section_id:
+          type: string
+          description: Current section ID (if applicable)
+        completion_status:
+          type: string
+          enum: [not_started, in_progress, completed]
+          description: Completion status
+        completion_percentage:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Completion percentage
+        last_accessed_at:
+          type: string
+          format: date-time
+          description: Last access timestamp
+        completed_at:
+          type: string
+          format: date-time
+          description: Completion timestamp (if completed)
+
+    Bookmark:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique bookmark identifier
+        user_id:
+          type: string
+          description: Associated user ID
+        section_id:
+          type: string
+          description: Associated section ID
+        notes:
+          type: string
+          description: User's notes for the bookmark
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+
+    AssessmentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique assessment response identifier
+        user_id:
+          type: string
+          description: Associated user ID
+        exercise_id:
+          type: string
+          description: Associated exercise ID
+        response:
+          type: string
+          description: User's response to the exercise
+        score:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Calculated score
+        is_correct:
+          type: boolean
+          description: Whether the response is correct
+        submitted_at:
+          type: string
+          format: date-time
+          description: Submission timestamp
